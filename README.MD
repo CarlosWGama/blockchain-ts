@@ -1,6 +1,6 @@
-# Exemplo Blockchain em JavaScript
+# Exemplo Blockchain em TypeScript
 
-Uma simples Blockchain criada em JavaScript.
+Uma simples Blockchain criada em TypeScript.
 
 ### TypeScript Puro
 ```
