@@ -1,33 +1,16 @@
-import express from 'express';
-import bodyParser from 'body-parser';
 import { Blockchain } from './classes/blockchain';
 import { Bloco } from './classes/bloco';
 
-
 let bc = new Blockchain();
 
-let app = express();
-app.use(bodyParser.json());
+//Cria 1 Bloco
+let bloco = new Bloco(bc.tamanho, bc.ultimoHash(), bc.dificuldade);
 
-//Exibe os dados da Blockchain
-app.get('/blockchain', (req, res) => {
-    res.send(bc);
-})
-
-//insere dados na Blockchain
-app.post('/dados', (req, res) => {
-    let bloco = new Bloco(bc.tamanho, bc.ultimoHash(), bc.dificuldade);
+//Insere as informações
+bloco.adicionarInformacao("Carlos W. Gama", "Olá Mundo"); 
+bloco.adicionarInformacao("Carlos W. Gama", "Hello World"); 
+bloco.criarHash();
     
-    //Recupera todas informações enviadas e salva no bloco
-    req.body.forEach(info => {
-       bloco.adicionarInformacao(info.autor, info.mensagem); 
-    })
-    bloco.criarHash();
-    
-    bc.adicionarBloco(bloco);
-    res.send("OK!");
-})
+bc.adicionarBloco(bloco);
 
-app.listen(80, () => {
-    console.log('iniciado');
-})
+console.log(bc);
